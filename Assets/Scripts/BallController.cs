@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
+
+
     public Collider2D col;
     [SerializeField] Rigidbody2D rg2d;
     [Header("Moving Components")]
@@ -16,6 +18,7 @@ public class BallController : MonoBehaviour
     [Header("Jumping Components")]
     public float jumpForce;
     [SerializeField] LayerMask whatIsGround;
+    //[SerializeField] LayerMask whatIsCoin;
     [SerializeField] float checkDistance;
     private bool isGround;
     [SerializeField] float bufferJump = 0.2f;
@@ -43,6 +46,7 @@ public class BallController : MonoBehaviour
     private void FixedUpdate()
     {
         isGround = Physics2D.Raycast(transform.position, Vector2.down, checkDistance, whatIsGround);
+        
         SlopeCheck();
 
         Moving();
@@ -60,8 +64,8 @@ public class BallController : MonoBehaviour
 
     void SlopeCheckVertical(Vector2 checkPos)
     {
-        RaycastHit2D rayHorizon = Physics2D.Raycast(checkPos, Vector2.down, slopeDistance ,whatIsGround);
-
+        RaycastHit2D rayHorizon = Physics2D.Raycast(checkPos, Vector2.down, Mathf.Infinity, LayerMask.GetMask("Ground","Coin"));
+       
         if (rayHorizon)
         {
             slopePerpendicular = Vector2.Perpendicular(rayHorizon.normal).normalized;
@@ -72,12 +76,14 @@ public class BallController : MonoBehaviour
             {
                 onSlope = true;
             }
-            else 
+            else
                 onSlope = false;
 
             Debug.DrawRay(rayHorizon.point, slopePerpendicular, Color.green);
             Debug.DrawRay(rayHorizon.point, rayHorizon.normal, Color.black);
         }
+        else
+            onSlope = false;
     }
 
     void GetInput()
@@ -132,6 +138,7 @@ public class BallController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        //Gizmos.color = Color.black;
         //Gizmos.DrawLine(transform.position, transform.position + Vector3.down * checkDistance);
     }
 }
