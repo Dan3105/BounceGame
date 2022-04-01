@@ -4,25 +4,55 @@ using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
-    [SerializeField] Collider2D downCol;
+    [Header("Parameters")]
     public float distance;
+    [SerializeField] public int plusScore;
+    private bool isTaken;
+    
+    [Header("Components")]
+    [SerializeField] Collider2D downCol;
+    [SerializeField] GameObject[] CoinOn;
+    [SerializeField] GameObject[] CoinOff;
     private GameObject player;
+
+    private void OnEnable()
+    {
+        SwitchCoinOn(true);
+        isTaken = false;
+    }
 
     private void FixedUpdate()
     {
-        //RaycastHit2D ray = Physics2D.Raycast(downCol.bounds.center.TransformPoint(Vector3.zero), Vector2.up, distance);
-        //if(ray)
-        //{
-        //    if(ray.collider.CompareTag("Coin collider"))
-        //    {
-        //        Debug.Log("Passed");
-        //    }
-        //}
+        if(!isTaken)
+        {
+            RaycastHit2D[] rays = Physics2D.RaycastAll(downCol.bounds.center, Vector2.up, distance);
+            foreach (var hitter in rays)
+            {
+                if (hitter.collider.CompareTag("Coin collider"))
+                {
+                    GameManager.Instance.UpdateScore(plusScore);
+                    isTaken = true;
+                    SwitchCoinOn(false);
+                }
+
+            }
+        }
+        
     }
 
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawRay(downCol.transform.TransformPoint(Vector3.zero), downCol.transform.TransformPoint(Vector3.zero) + Vector3.up * distance);
+
+        Gizmos.DrawLine(downCol.bounds.center, downCol.bounds.center + Vector3.up * distance);
+
+    }
+
+    private void SwitchCoinOn(bool turn)
+    {
+        foreach (var child in CoinOn)
+            child.SetActive(turn);
+        foreach (var child in CoinOff)
+            child.SetActive(!turn);
     }
 }

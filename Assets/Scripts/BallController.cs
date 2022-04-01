@@ -33,6 +33,8 @@ public class BallController : MonoBehaviour
     private float slopeOldAngle;
     private bool onSlope;
 
+    [Header("Effects and Animations")]
+    public GameObject explodeEffect;
     private void Awake()
     {
         rg2d = GetComponent<Rigidbody2D>();
@@ -40,20 +42,19 @@ public class BallController : MonoBehaviour
 
     private void Update()
     {
-        GetInput();
+        if(GameManager.Instance.isPlaying)
+            GetInput();
     }
 
     private void FixedUpdate()
     {
-        isGround = Physics2D.Raycast(transform.position, Vector2.down, checkDistance, whatIsGround);
-        
-        SlopeCheck();
+            isGround = Physics2D.Raycast(transform.position, Vector2.down, checkDistance, whatIsGround);
 
-        Moving();
+            SlopeCheck();
 
-        Jumping();
+            Moving();
 
-        
+            Jumping(); 
     }
 
     private void SlopeCheck()
@@ -88,7 +89,7 @@ public class BallController : MonoBehaviour
 
     void GetInput()
     {
-        xMovement = Input.GetAxis("Horizontal");
+        xMovement = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetKeyDown(KeyCode.Space))
             bufferCounter = bufferJump;
@@ -141,4 +142,6 @@ public class BallController : MonoBehaviour
         //Gizmos.color = Color.black;
         //Gizmos.DrawLine(transform.position, transform.position + Vector3.down * checkDistance);
     }
+
+
 }

@@ -9,6 +9,7 @@ public class GameScence : MonoBehaviour
 
     public TextMeshProUGUI livesUI;
     public TextMeshProUGUI timeUI;
+    public TextMeshProUGUI scoreUI;
 
 
     private void Awake()
@@ -33,5 +34,10 @@ public class GameScence : MonoBehaviour
         string minText = min >= 10 ? ((int)min).ToString() : "0" + ((int)min).ToString();
 
         timeUI.text = minText + ":" + secondText;
+    }
+
+    public void UpdateScore(int score)
+    {
+        scoreUI.text = "Score: " + score.ToString();
     }
 }
