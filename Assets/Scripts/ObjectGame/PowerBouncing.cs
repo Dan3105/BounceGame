@@ -29,7 +29,6 @@ public class PowerBouncing : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(dir);
         if(collision.collider.CompareTag("Player"))
         {
             collision.collider.GetComponent<Rigidbody2D>().AddForce(direction * pushForce, ForceMode2D.Impulse);

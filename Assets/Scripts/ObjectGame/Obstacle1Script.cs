@@ -43,12 +43,19 @@ public class Obstacle1Script : MonoBehaviour
         if (isVertical)
         {
             if (transform.position.x >= maxRange || transform.position.x <= minRange)
+            {
+                float change = transform.position.x > maxRange ? maxRange : minRange;
+                transform.position = new Vector2(change, transform.position.y);
                 dir *= -1;
+            }
+                
         }
         else
         {
             if (transform.position.y >= maxRange || transform.position.y <= minRange)
             {
+                float change = transform.position.y > maxRange ? maxRange : minRange;
+                transform.position = new Vector2(transform.position.x, change);
                 dir *= -1;
             }
         }
@@ -59,16 +66,16 @@ public class Obstacle1Script : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Player") && coolDown < 0f)
+        if(collision.gameObject.CompareTag("Player") && coolDown < 0f && GameManager.Instance.isPlaying)
         {
             playerCol = collision.gameObject.GetComponent<Collider2D>();
             int dir = collision.collider.bounds.center.x > col.bounds.center.x ? -1 : 1;
             GameManager.Instance.UpdateLive(-1);
             StartCoroutine("IgnorePlayer");
 
-                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left * forcePush * dir, ForceMode2D.Impulse);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left * forcePush * dir, ForceMode2D.Impulse);
             
-        coolDown = 0.3f;
+            coolDown = 0.3f;
 
         }
     }

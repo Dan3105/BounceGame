@@ -127,5 +127,6 @@ MonoBehaviour:
   speed: 5
   range: 4.14
   originalPos: 0
+  goalPos: 0
   coolDown: 0
   forcePush: 7.7

@@ -7,7 +7,7 @@ public class CoinScript : MonoBehaviour
     [Header("Parameters")]
     public float distance;
     [SerializeField] public int plusScore;
-    private bool isTaken;
+    public bool isTaken;
     
     [Header("Components")]
     [SerializeField] Collider2D downCol;
@@ -30,8 +30,10 @@ public class CoinScript : MonoBehaviour
             {
                 if (hitter.collider.CompareTag("Coin collider"))
                 {
+                    
                     GameManager.Instance.UpdateScore(plusScore);
                     isTaken = true;
+                    PlayerPrefs.SetInt("Coin", GameManager.Instance.score);
                     SwitchCoinOn(false);
                 }
 
@@ -48,8 +50,9 @@ public class CoinScript : MonoBehaviour
 
     }
 
-    private void SwitchCoinOn(bool turn)
+    public void SwitchCoinOn(bool turn)
     {
+        isTaken = !turn;
         foreach (var child in CoinOn)
             child.SetActive(turn);
         foreach (var child in CoinOff)

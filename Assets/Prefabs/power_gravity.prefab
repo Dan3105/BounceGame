@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4417909126967870714}
   - component: {fileID: 4417909126967870713}
   - component: {fileID: 4417909126967870712}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopPush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4417909127208661907}
   - component: {fileID: 4417909127208661908}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: power_gravity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 4417909127230068689}
   - component: {fileID: 4417909127230068688}
   - component: {fileID: 4417909127230068703}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftPush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 4417909127545760066}
   - component: {fileID: 4417909127545760065}
   - component: {fileID: 4417909127545760064}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightPush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
