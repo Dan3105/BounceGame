@@ -30,7 +30,7 @@ public class CoinScript : MonoBehaviour
             {
                 if (hitter.collider.CompareTag("Coin collider"))
                 {
-                    
+                    GameManager.Instance.PlayCoin();
                     GameManager.Instance.UpdateScore(plusScore);
                     isTaken = true;
                     PlayerPrefs.SetInt("Coin", GameManager.Instance.score);

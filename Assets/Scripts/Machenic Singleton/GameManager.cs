@@ -22,15 +22,15 @@ public class GameManager : TemplateSingleton<GameManager>
     Vector2 savedPos;
 
     [Header("Components of player and effects")]
-    // public GameObject[] listPlayer;
     public Transform startPos; 
     public PlayerData[] listPlayerData;// (list data)
-    //public GameObject[] listPlayerObject;//x
     public PlayerData currData; //x 
     
-    //public GameObject currPlayer; //x
     public GameObject explodeEffect;
     public GameObject winningEffect;
+
+    public AudioSource audioSource;
+    public AudioClip[] soundList;
 
     [Header("Coin Parmeters")]
     public GameObject coinObject;
@@ -213,5 +213,14 @@ public class GameManager : TemplateSingleton<GameManager>
 
     }
 
+    public void PlayHitting()
+    {
+        audioSource.PlayOneShot(soundList[1], 1f);
+    }
 
+    public void PlayCoin()
+    {
+        audioSource.PlayOneShot(soundList[0], 1f);
+
+    }
 }

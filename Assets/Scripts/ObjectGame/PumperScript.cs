@@ -10,7 +10,7 @@ public class PumperScript : MonoBehaviour
     {
         if(collision.collider.CompareTag("Player"))
         {
-           
+            GameManager.Instance.PlayHitting();
             BallController.Instance.ReInitPlayer(dataSwitch);
         }    
     }

@@ -215,12 +215,13 @@ public class BallController : TemplateSingleton<BallController>
         //slow
         spriteRender.sprite = data.ballSprite;
         //spriteRender.sprite = data.ballSprite;
-        
+        Debug.Log(spriteRender.sprite);
 
         currAnim.runtimeAnimatorController = data.animator;
 
         GameManager.Instance.currMode = data.indexVersion;
         col.radius = data.ballSprite.bounds.extents.x > data.ballSprite.bounds.extents.y ?
     data.ballSprite.bounds.extents.x : data.ballSprite.bounds.extents.y;
+        Debug.Log(col.radius);
     }
 }

@@ -72,7 +72,7 @@ public class Obstacle1Script : MonoBehaviour
             int dir = collision.collider.bounds.center.x > col.bounds.center.x ? -1 : 1;
             GameManager.Instance.UpdateLive(-1);
             StartCoroutine("IgnorePlayer");
-
+            GameManager.Instance.PlayHitting();
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left * forcePush * dir, ForceMode2D.Impulse);
             
             coolDown = 0.3f;
